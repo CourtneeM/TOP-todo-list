@@ -12,20 +12,15 @@ class TodoList {
     this.checklist = checklist;
     this.listName = listName;
   };
-}
 
-function addToProjectManager(todoList, projectName) {
-  if(!projectManager.hasOwnProperty(projectName)) {
-    projectManager[projectName] = [];
-  }
-  projectManager[projectName].push(todoList);
-  console.log(projectManager);
-}
-
-function createTodoList(title, description, dueDate, priority, notes, checklist, listName) {
-  return new TodoList(title, description, dueDate, priority, notes, checklist, listName);
-}
-
+  addToProjectManager(projectName) {
+    if(!projectManager.hasOwnProperty(projectName)) {
+      projectManager[projectName] = [];
+    }
+    projectManager[projectName].push(this);
+    console.log(projectManager);
+  };
+};
 
 // example todo list parameters
 // title = 'clean room'
@@ -37,19 +32,5 @@ function createTodoList(title, description, dueDate, priority, notes, checklist,
 // listName = 'daily task 1'
 
 // examples
-let dailyTodo = createTodoList('1', '2', '3', '4', '5');
-
-let redTodo = new TodoList('clean room', 'pick up loose items around room', 'tomorrow', 'medium', '', [{task:'organize desk', completed: false}, {task:'dust tv', completed: false}, {task: 'pick up socks', completed: false}]);
-
-addToProjectManager(dailyTodo, 'defaultList');
-addToProjectManager(dailyTodo, 'defaultList');
-addToProjectManager(redTodo, 'important');
-
-
-// let redTodo = new TodoList('paint', 'paint house', 'today', 'high');
-// console.log(redTodo.title);
-// todoListManager.importantList = [];
-// todoListManager.importantList.push(redTodo);
-// console.log(todoListManager);
-
-export { addToProjectManager };
+let dailyTodo = new TodoList('1', '2', '3', '4', '5');
+dailyTodo.addToProjectManager('important');
