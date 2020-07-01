@@ -5,12 +5,13 @@
     <title>TOP Todo List</title>
   </head>
   <body>
-    <div id="projects">
+    <div id="projects-container">
       <h2>Projects</h2>
       <div>
         <input id="new-project-input" type="text" placeholder="New Project">
-        <p>+</p>
+        <p id="new-project-btn">+</p>
       </div>
+      <div id="project-list"></div>
     </div>
     <div id="current-todos">
       <h2>Default List</h2>
@@ -37,11 +38,11 @@
             <input id="notes-input" type="text">
           </div>
           <div>
-            <button id="create-todo-btn">Add</button>
+            <button id="add-todo-btn">Add</button>
           </div>
         </div>
       </div>
     </div>
-    <script type="module" src="../src/createTodoList.js"></script>
+    <script type="module" src="../src/todoListHandler.js"></script>
   </body>
 </html>
