@@ -1,6 +1,6 @@
 // import projectHandler from './projectHandler.js';
 
-class TodoList {
+class Todo {
   constructor(title, description, dueDate, priority, notes = "") {
     this.title = title;
     this.description = description;
@@ -13,48 +13,61 @@ class TodoList {
 
 function todoListHandler() {
   let todos = [];
-
+  const addTodoBtn = document.getElementById('add-todo-btn');
+  const todoListContainer = document.getElementById('todo-list-container');
   let titleInput = document.getElementById('title-input');
   let descriptionInput = document.getElementById('description-input');
   let dueDateInput = document.getElementById('due-date-input');
   let priorityInput = document.getElementById('priority-input');
   let notesInput = document.getElementById('notes-input');
-  let addTodoBtn = document.getElementById('add-todo-btn');
-  (function createTodoList() {
+
+  (function createTodo() {
     addTodoBtn.addEventListener('click', () => {
-      todos.push(new TodoList(titleInput.value, descriptionInput.value, dueDateInput.value, priorityInput.value, notesInput.value));
+      todos.push(new Todo(titleInput.value, descriptionInput.value, dueDateInput.value, priorityInput.value, notesInput.value));
       titleInput.value = "";
       descriptionInput.value = "";
       dueDateInput.value = "";
       priorityInput.value = "";
       notesInput.value = "";
+    });
+    displayTodoList();
+  })();
+  
+  
+  (function deleteTodo() {
+    todoListContainer.addEventListener('click', e => {
+      if(e.target.classList.contains('delete-todo-btn')) {
+        let todoIndex = (Array.from(e.target.parentNode.parentNode.children)).indexOf(e.target.parentNode);
+        todos.splice([todoIndex], 1);
+        displayTodoList();
+      }
       console.log(todos);
     });
   })();
   
-  (function displayTodoList() {
-    const todoListContainer = document.getElementById('todo-list-container');
-    addTodoBtn.addEventListener('click', () => {
-      while(todoListContainer.firstChild) {
-        todoListContainer.removeChild(todoListContainer.lastChild);
-      }
-      for(let i = 0; i < todos.length; i++) {
-        let div = document.createElement('div');
-        div.classList.add('todo-container');
-        for(let item in todos[i]) {
-          let p = document.createElement('p');
-          p.textContent = `${item}: ${todos[i][item]}`;
-          div.appendChild(p);
+  function displayTodoList() {
+    document.addEventListener('click', e => {
+      if(e.target.id === 'add-todo-btn' || e.target.classList.contains('delete-todo-btn')) {
+        while(todoListContainer.firstChild) {
+          todoListContainer.removeChild(todoListContainer.lastChild);
         }
-        todoListContainer.appendChild(div);
-        let deleteTodoBtn = document.createElement('p');
-        deleteTodoBtn.classList.add('delete-todo-btn');
-        deleteTodoBtn.textContent = "DELETE";
-        div.appendChild(deleteTodoBtn);
+        for(let i = 0; i < todos.length; i++) {
+          let div = document.createElement('div');
+          div.classList.add('todo-container');
+          for(let item in todos[i]) {
+            let p = document.createElement('p');
+            p.textContent = `${item}: ${todos[i][item]}`;
+            div.appendChild(p);
+          }
+          todoListContainer.appendChild(div);
+          let deleteTodoBtn = document.createElement('p');
+          deleteTodoBtn.classList.add('delete-todo-btn');
+          deleteTodoBtn.textContent = "DELETE";
+          div.appendChild(deleteTodoBtn);
+        };
       };
     });
-  })();
-
+  };
 };
 
 todoListHandler();
