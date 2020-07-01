@@ -22,6 +22,10 @@ class TodoList {
   };
 };
 
+function createTodoList(title, description, dueDate, priority, notes, checklist, listName) {
+  return new TodoList(title, description, dueDate, priority, notes, checklist, listName);
+}
+
 // example todo list parameters
 // title = 'clean room'
 // description = 'pick up loose items around room'
@@ -33,4 +37,6 @@ class TodoList {
 
 // examples
 let dailyTodo = new TodoList('1', '2', '3', '4', '5');
-dailyTodo.addToProjectManager('important');
+dailyTodo.addToProjectManager('defaultList');
+
+export { createTodoList };

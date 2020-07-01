@@ -1,0 +1,48 @@
+body {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  font-family:sans-serif;
+}
+
+h2 {
+  text-align: center;
+}
+
+#projects {
+  width: 500px;
+  text-align: center;
+  border: 1px solid #000;
+}
+
+#projects div {
+  position: relative;
+  width: 180px;
+  margin: 0 auto;
+}
+
+#projects p {
+  position: absolute;
+  top: -12px;
+  right: 6px;
+  padding: 1px 6px;
+  background-color: #ccc;
+  border-radius: 50%;
+}
+
+#projects input {
+  width: 160px;
+  padding: 5px 5px 5px 10px;
+  border: 1px solid #666;
+  border-radius: 15px;
+}
+
+#projects input:focus {
+  outline: none;
+}
+
+
+#current-todos {
+  flex-basis: 70%;
+}
