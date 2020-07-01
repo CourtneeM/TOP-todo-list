@@ -10,20 +10,20 @@ h2 {
   text-align: center;
 }
 
-#projects {
+#projects-container {
   width: 500px;
   padding: 0 10px;
   text-align: center;
-  border: 1px solid #000;
+  background-color: #eee;
 }
 
-#projects div {
+#projects-container div {
   position: relative;
   width: 240px;
   margin: 0 auto;
 }
 
-#projects p {
+#projects-container div:nth-child(2) p {
   position: absolute;
   top: -12px;
   right: 6px;
@@ -33,14 +33,14 @@ h2 {
   cursor: pointer;
 }
 
-#projects input {
+#projects-container input {
   width: 220px;
   padding: 5px 5px 5px 10px;
   border: 1px solid #666;
   border-radius: 15px;
 }
 
-#projects input:focus {
+#projects-container input:focus {
   outline: none;
 }
 
@@ -67,7 +67,7 @@ h2 {
   width: 200px;
 }
 
-#create-todo-btn {
+#add-todo-btn {
   margin-top: 30px;
   padding: 15px 30px;
   color: #fff;
