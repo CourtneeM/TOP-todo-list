@@ -3,14 +3,13 @@ let projectManager = {
 };
 
 class TodoList {
-  constructor(title, description, dueDate, priority, notes = "", checklist = "", listName = "default") {
+  constructor(title, description, dueDate, priority, notes = "", checklist = "") {
     this.title = title;
     this.description = description;
     this.dueDate = dueDate;
     this.priority = priority;
     this.notes = notes;
     this.checklist = checklist;
-    this.listName = listName;
   };
 
   addToProjectManager(projectName) {
@@ -22,8 +21,8 @@ class TodoList {
   };
 };
 
-function createTodoList(title, description, dueDate, priority, notes, checklist, listName) {
-  return new TodoList(title, description, dueDate, priority, notes, checklist, listName);
+function createTodoList(title, description, dueDate, priority, notes, checklist) {
+  return new TodoList(title, description, dueDate, priority, notes, checklist);
 }
 
 // example todo list parameters
@@ -33,7 +32,6 @@ function createTodoList(title, description, dueDate, priority, notes, checklist,
 // priority = 'medium'
 // notes = ''
 // checklist = [{task:'organize desk', completed: false}, {task:'dust tv', completed: false}, {task: 'pick up socks', completed: false}]
-// listName = 'daily task 1'
 
 // examples
 let dailyTodo = new TodoList('1', '2', '3', '4', '5');
