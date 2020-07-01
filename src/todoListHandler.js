@@ -43,11 +43,15 @@ function todoListHandler() {
         div.classList.add('todo-container');
         for(let item in todos[i]) {
           let p = document.createElement('p');
-          p.textContent = todos[i][item];
+          p.textContent = `${item}: ${todos[i][item]}`;
           div.appendChild(p);
         }
         todoListContainer.appendChild(div);
-      }
+        let deleteTodoBtn = document.createElement('p');
+        deleteTodoBtn.classList.add('delete-todo-btn');
+        deleteTodoBtn.textContent = "DELETE";
+        div.appendChild(deleteTodoBtn);
+      };
     });
   })();
 
