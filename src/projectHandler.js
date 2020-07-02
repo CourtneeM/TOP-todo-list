@@ -9,8 +9,10 @@ function projectHandler() {
   
   (function addNewProject() {
     newProjectBtn.addEventListener('click', (e) => {
-      projects[newProjectInput.value] = [];
-      newProjectInput.value = "";
+      if(newProjectInput.value !== "") {
+        projects[newProjectInput.value] = [];
+        newProjectInput.value = "";
+      }
     });
   })();
 
