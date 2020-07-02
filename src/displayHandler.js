@@ -10,7 +10,7 @@ function displayHandler() {
     const todoContainerH2 = document.querySelector('#current-todos>h2')
     todoContainerH2.textContent = "Default List";
     projectList.addEventListener('click', e => {
-      const project = projectList.querySelectorAll('p');
+      const project = projectList.querySelectorAll('p:first-child');
       const projectIndex = Array.from(e.target.parentNode.children).indexOf(e.target);
       const selectedProjectName = project[projectIndex].textContent;
 
@@ -20,7 +20,7 @@ function displayHandler() {
         }
       };
 
-      e.target.id = 'active';
+      e.target.parentNode.id = 'active';
       todoContainerH2.textContent = selectedProjectName;
     });
   })();
@@ -28,10 +28,16 @@ function displayHandler() {
   (function displayProjectList() {
     const newProjectBtn = document.getElementById('new-project-btn');
     for(let listName in projects) {
-      let p = document.createElement('p');
-      p.textContent = listName;
-      p.id = 'active';
-      projectList.appendChild(p);
+      let div = document.createElement('div');
+      let listNameP = document.createElement('p');
+      let deleteProjectP = document.createElement('p');
+      listNameP.textContent = listName;
+      deleteProjectP.textContent = "x";
+      deleteProjectP.classList.add('delete-project-btn');
+      listNameP.id = 'active';
+      div.appendChild(listNameP);
+      div.appendChild(deleteProjectP);
+      projectList.appendChild(div);
     };
     newProjectBtn.addEventListener('click', () => {
       let activeProject = document.getElementById('active');
@@ -39,12 +45,18 @@ function displayHandler() {
         projectList.removeChild(projectList.firstChild);
       }
       for(let listName in projects) {
-        let p = document.createElement('p');
-        p.textContent = listName;
+        let div = document.createElement('div');
+        let listNameP = document.createElement('p');
+        let deleteProjectP = document.createElement('p');
+        listNameP.textContent = listName;
+        deleteProjectP.textContent = "x";
+        deleteProjectP.classList.add('delete-project-btn');
         if(activeProject.textContent === listName) {
-          p.id = "active";
+          listNameP.id = "active";
         }
-        projectList.appendChild(p);
+        div.appendChild(listNameP);
+        div.appendChild(deleteProjectP);
+        projectList.appendChild(div);
       }
     });
   })();
@@ -53,14 +65,13 @@ function displayHandler() {
     const todoListContainer = document.getElementById('todo-list-container');
     document.addEventListener('click', e => {
       if(e.target.id === 'add-todo-btn' || e.target.classList.contains('delete-todo-btn') || e.target.id === 'active') {
-        let activeProject = document.getElementById('active').textContent;
+        let activeProject = document.getElementById('active').firstChild.textContent;
         if(e.target.id === 'add-todo-btn') {
           projects[activeProject].push(todos[todos.length - 1]);
         };
         if(e.target.classList.contains('delete-todo-btn')) {
           projects[activeProject].splice(Array.from(e.target.parentNode.parentNode.children).indexOf(e.target.parentNode), 1);
         }
-        console.log(projects[activeProject]);
         while(todoListContainer.firstChild) {
           todoListContainer.removeChild(todoListContainer.lastChild);
         };
@@ -78,6 +89,7 @@ function displayHandler() {
           deleteTodoBtn.textContent = "DELETE";
           div.appendChild(deleteTodoBtn);
         };
+        console.log(projects);
       };
     });
   })();

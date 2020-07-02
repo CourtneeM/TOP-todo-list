@@ -23,7 +23,7 @@ h2 {
   margin: 0 auto;
 }
 
-#projects-container div:nth-child(2) p {
+#new-project-btn {
   position: absolute;
   top: -13px;
   right: 6px;
@@ -34,7 +34,7 @@ h2 {
   cursor: pointer;
 }
 
-#projects-container div:nth-child(2) p:hover {
+#new-project-btn:hover {
   background-color: #ddd;
   transition: 0.2s;
 }
@@ -51,21 +51,33 @@ input:focus {
   outline: none;
 }
 
-#project-list p {
+#project-list div {
   margin: 0;
-  padding: 15px 0;
+  padding: 10px 0 15px;
   border-top: 1px solid #ccc;
   cursor: pointer;
 }
 
-#project-list p:last-child {
+#project-list div:last-child {
   padding-bottom: 15px;
   border-bottom: 1px solid #ccc;
 }
 
-#project-list p:hover {
+#project-list > div:hover {
   background-color: #ddd;
   transition: 0.2s;
+}
+
+.delete-project-btn {
+  position: absolute;
+  top: 8px;
+  left: 0;
+  padding: 0 5px;
+  font-weight: bold;
+  color: #fff;
+  background-color: red;
+  border: 1px solid #000;
+  border-radius: 50%;
 }
 
 #current-todos {
