@@ -1,19 +1,34 @@
-let projects = {
-  defaultList: [] 
-};
-
 function projectHandler() {
+  let projects = {
+    "Default List": [] 
+  };
+  
+  const newProjectInput = document.getElementById('new-project-input');
+  const newProjectBtn = document.getElementById('new-project-btn');
+  const projectList = document.getElementById('project-list');
   
   (function addNewProject() {
-    const newProjectInput = document.getElementById('new-project-input');
-    const newProjectBtn = document.getElementById('new-project-btn');
-    const projectList = document.getElementById('project-list');
-    newProjectBtn.addEventListener('click', () => {
-      let p = document.createElement('p');
+    newProjectBtn.addEventListener('click', (e) => {
       projects[newProjectInput.value] = [];
-      p.textContent = newProjectInput.value;
-      projectList.appendChild(p);
       newProjectInput.value = "";
+    });
+  })();
+
+  (function displayProjects() {
+    for(let listName in projects) {
+      let p = document.createElement('p');
+      p.textContent = listName;
+      projectList.appendChild(p);
+    }
+    newProjectBtn.addEventListener('click', () => {
+      while(projectList.lastChild) {
+        projectList.removeChild(projectList.firstChild);
+      }
+      for(let listName in projects) {
+        let p = document.createElement('p');
+        p.textContent = listName;
+        projectList.appendChild(p);
+      }
       console.log(projects);
     });
   })();

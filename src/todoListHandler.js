@@ -1,4 +1,4 @@
-// import projectHandler from './projectHandler.js';
+import projectHandler from './projectHandler.js';
 
 class Todo {
   constructor(title, description, dueDate, priority, notes = "") {
@@ -71,5 +71,5 @@ function todoListHandler() {
 };
 
 todoListHandler();
-// let projects = projectHandler();
-// console.log(projects);
+let projects = projectHandler();
+console.log(projects["Default List"]);
