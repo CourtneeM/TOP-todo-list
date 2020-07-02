@@ -29,9 +29,7 @@ function todoListHandler() {
       dueDateInput.value = "";
       priorityInput.value = "";
       notesInput.value = "";
-      console.log(todos);
     });
-    displayTodoList();
   })();
   
   
@@ -40,38 +38,10 @@ function todoListHandler() {
       if(e.target.classList.contains('delete-todo-btn')) {
         let todoIndex = (Array.from(e.target.parentNode.parentNode.children)).indexOf(e.target.parentNode);
         todos.splice([todoIndex], 1);
-        displayTodoList();
       }
-      console.log(todos);
     });
   })();
-  
-  function displayTodoList() {
-    document.addEventListener('click', e => {
-      if(e.target.id === 'add-todo-btn' || e.target.classList.contains('delete-todo-btn')) {
-        while(todoListContainer.firstChild) {
-          todoListContainer.removeChild(todoListContainer.lastChild);
-        }
-        for(let i = 0; i < todos.length; i++) {
-          let div = document.createElement('div');
-          div.classList.add('todo-container');
-          for(let item in todos[i]) {
-            let p = document.createElement('p');
-            p.textContent = `${item}: ${todos[i][item]}`;
-            div.appendChild(p);
-          }
-          todoListContainer.appendChild(div);
-          let deleteTodoBtn = document.createElement('p');
-          deleteTodoBtn.classList.add('delete-todo-btn');
-          deleteTodoBtn.textContent = "DELETE";
-          div.appendChild(deleteTodoBtn);
-        };
-      };
-    });
-  };
+  return todos;
 };
-
-// let projects = projectHandler();
-// console.log(projects["Default List"]);
 
 export default todoListHandler;
