@@ -2,8 +2,10 @@ import projectHandler from './projectHandler.js';
 import todoListHandler from './todoListHandler.js';
 
 function displayHandler() {
-  (function displayProjects() {
-    let projects = projectHandler();
+  let projects = projectHandler();
+  let todos = todoListHandler();
+
+  (function displayProject() {
     const projectList = document.getElementById('project-list');
     const todoContainerH2 = document.querySelector('#current-todos>h2')
     todoContainerH2.textContent = "Default List";
@@ -16,8 +18,28 @@ function displayHandler() {
     });
   })();
 
+  (function displayProjectList() {
+    const projectList = document.getElementById('project-list');
+    const newProjectBtn = document.getElementById('new-project-btn');
+    for(let listName in projects) {
+      let p = document.createElement('p');
+      p.textContent = listName;
+      projectList.appendChild(p);
+    }
+    newProjectBtn.addEventListener('click', () => {
+      while(projectList.lastChild) {
+        projectList.removeChild(projectList.firstChild);
+      }
+      for(let listName in projects) {
+        let p = document.createElement('p');
+        p.textContent = listName;
+        projectList.appendChild(p);
+      }
+      console.log(projects);
+    });
+  })();
+
   (function displayTodoList() {
-    let todos = todoListHandler();
     const todoListContainer = document.getElementById('todo-list-container');
     document.addEventListener('click', e => {
       if(e.target.id === 'add-todo-btn' || e.target.classList.contains('delete-todo-btn')) {
