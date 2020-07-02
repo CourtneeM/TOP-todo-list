@@ -73,7 +73,10 @@ function displayHandler() {
           deleteTodoBtn.textContent = "DELETE";
           div.appendChild(deleteTodoBtn);
         };
-        console.log(todos);
+        // push new todo to active project
+        let activeProject = document.getElementById('active').textContent;
+        projects[activeProject].push(todos[todos.length - 1]);
+        console.log(projects);
       };
     });
   })();

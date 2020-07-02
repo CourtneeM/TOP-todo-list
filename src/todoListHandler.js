@@ -1,5 +1,3 @@
-import projectHandler from './projectHandler.js';
-
 class Todo {
   constructor(title, description, dueDate, priority, notes = "") {
     this.title = title;
