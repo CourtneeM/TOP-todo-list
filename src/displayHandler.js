@@ -13,6 +13,15 @@ function displayHandler() {
       const project = projectList.querySelectorAll('p');
       const projectIndex = Array.from(e.target.parentNode.children).indexOf(e.target);
       const selectedProjectName = project[projectIndex].textContent;
+
+      for(let i = 0; i < Array.from(project).length; i++) {
+        if(project[i].id === 'active') {
+          project[i].removeAttribute('id');
+        }
+        console.log(project);
+      };
+
+      e.target.id = 'active';
       todoContainerH2.textContent = selectedProjectName;
       console.log(projects[selectedProjectName]);
     });
@@ -24,18 +33,22 @@ function displayHandler() {
     for(let listName in projects) {
       let p = document.createElement('p');
       p.textContent = listName;
+      p.id = 'active';
       projectList.appendChild(p);
-    }
+    };
     newProjectBtn.addEventListener('click', () => {
+      let activeProject = document.getElementById('active');
       while(projectList.lastChild) {
         projectList.removeChild(projectList.firstChild);
       }
       for(let listName in projects) {
         let p = document.createElement('p');
         p.textContent = listName;
+        if(activeProject.textContent === listName) {
+          p.id = "active";
+        }
         projectList.appendChild(p);
       }
-      console.log(projects);
     });
   })();
 
