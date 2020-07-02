@@ -14,7 +14,7 @@ function projectHandler() {
     });
   })();
 
-  (function displayProjects() {
+  (function displayProjectList() {
     for(let listName in projects) {
       let p = document.createElement('p');
       p.textContent = listName;

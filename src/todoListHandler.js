@@ -29,6 +29,7 @@ function todoListHandler() {
       dueDateInput.value = "";
       priorityInput.value = "";
       notesInput.value = "";
+      console.log(todos);
     });
     displayTodoList();
   })();
@@ -70,6 +71,7 @@ function todoListHandler() {
   };
 };
 
-todoListHandler();
-let projects = projectHandler();
-console.log(projects["Default List"]);
+// let projects = projectHandler();
+// console.log(projects["Default List"]);
+
+export default todoListHandler;
