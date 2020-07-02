@@ -57,7 +57,10 @@ function displayHandler() {
         if(e.target.id === 'add-todo-btn') {
           projects[activeProject].push(todos[todos.length - 1]);
         };
-        console.log(projects);
+        if(e.target.classList.contains('delete-todo-btn')) {
+          projects[activeProject].splice(Array.from(e.target.parentNode.parentNode.children).indexOf(e.target.parentNode), 1);
+        }
+        console.log(projects[activeProject]);
         while(todoListContainer.firstChild) {
           todoListContainer.removeChild(todoListContainer.lastChild);
         };
