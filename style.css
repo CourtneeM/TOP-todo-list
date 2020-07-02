@@ -25,25 +25,48 @@ h2 {
 
 #projects-container div:nth-child(2) p {
   position: absolute;
-  top: -12px;
+  top: -13px;
   right: 6px;
   padding: 1px 6px;
-  background-color: #ccc;
+  background-color: #eee;
+  border: 1px solid #666;
   border-radius: 50%;
   cursor: pointer;
 }
 
+#projects-container div:nth-child(2) p:hover {
+  background-color: #ddd;
+  transition: 0.2s;
+}
+
 #projects-container input {
   width: 220px;
+  margin-bottom: 35px;
   padding: 5px 5px 5px 10px;
   border: 1px solid #666;
   border-radius: 15px;
 }
 
-#projects-container input:focus {
+input:focus {
   outline: none;
 }
 
+#project-list p {
+  margin: 0;
+  padding: 15px 0;
+  border-top: 1px solid #ccc;
+  cursor: pointer;
+}
+
+#project-list p:last-child {
+  padding-bottom: 15px;
+  border-bottom: 1px solid #ccc;
+}
+
+#project-list p:hover {
+  background-color: #ddd;
+  transition: 0.2s;
+}
 
 #current-todos {
   flex-basis: 85%;
@@ -72,9 +95,15 @@ h2 {
   padding: 15px 30px;
   color: #fff;
   font-weight: bold;
-  background-color: turquoise;
+  background-color: rgb(64, 224, 208);
   border: 1px solid #fff;
   border-radius: 7px;
+  cursor: pointer;
+}
+
+#add-todo-btn:hover {
+  background-color: rgb(81, 187, 176);
+  transition: 0.2s;
 }
 
 #todo-list-container {
