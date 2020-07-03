@@ -52,14 +52,16 @@ function displayHandler() {
         let listNameP = document.createElement('p');
         let deleteProjectP = document.createElement('p');
         listNameP.textContent = listName;
-        deleteProjectP.textContent = "x";
-        deleteProjectP.classList.add('delete-project-btn');
         if(document.querySelector('#active') == null) {
           div.id = 'active';
           todoContainerH2.textContent = listName;
         }
         div.appendChild(listNameP);
-        div.appendChild(deleteProjectP);
+        if(Object.keys(projects).length > 1) {
+          deleteProjectP.textContent = "x";
+          deleteProjectP.classList.add('delete-project-btn');
+          div.appendChild(deleteProjectP);
+        }
         projectList.appendChild(div);
       };
     };
