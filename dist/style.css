@@ -53,13 +53,12 @@ input:focus {
 
 #project-list div {
   margin: 0;
-  padding: 10px 0 15px;
+  padding: 0;
   border-top: 1px solid #ccc;
   cursor: pointer;
 }
 
 #project-list div:last-child {
-  padding-bottom: 15px;
   border-bottom: 1px solid #ccc;
 }
 
@@ -68,10 +67,16 @@ input:focus {
   transition: 0.2s;
 }
 
+#project-list div p:first-child {
+  margin: 0;
+  padding: 30px;
+}
+
 .delete-project-btn {
   position: absolute;
-  top: 8px;
+  top: 29px;
   left: 0;
+  margin: 0;
   padding: 0 5px;
   font-weight: bold;
   color: #fff;

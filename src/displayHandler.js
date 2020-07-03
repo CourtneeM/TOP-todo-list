@@ -5,42 +5,45 @@ function displayHandler() {
   let projects = projectHandler();
   let todos = todoListHandler();
   const projectList = document.getElementById('project-list');
+  const todoContainerH2 = document.querySelector('#current-todos>h2');
 
   (function displayProject() {
-    const todoContainerH2 = document.querySelector('#current-todos>h2')
-    todoContainerH2.textContent = "Default List";
     projectList.addEventListener('click', e => {
-      const project = projectList.querySelectorAll('p:first-child');
-      const projectIndex = Array.from(e.target.parentNode.children).indexOf(e.target);
-      const selectedProjectName = project[projectIndex].textContent;
+      const project = Array.from(projectList.querySelectorAll('div'));
+      const projectIndex = Array.from(e.target.parentNode.parentNode.children).indexOf(e.target.parentNode);
+      let selectedProjectName = project[projectIndex].firstChild.textContent;
+      if(e.target.classList.contains('delete-project-btn')) {
 
+      };
+      todoContainerH2.textContent = selectedProjectName;
+      
       for(let i = 0; i < Array.from(project).length; i++) {
         if(project[i].id === 'active') {
           project[i].removeAttribute('id');
         }
       };
-
       e.target.parentNode.id = 'active';
-      todoContainerH2.textContent = selectedProjectName;
     });
   })();
 
   (function displayProjectList() {
     const newProjectBtn = document.getElementById('new-project-btn');
-    for(let listName in projects) {
-      let div = document.createElement('div');
-      let listNameP = document.createElement('p');
-      let deleteProjectP = document.createElement('p');
-      listNameP.textContent = listName;
-      deleteProjectP.textContent = "x";
-      deleteProjectP.classList.add('delete-project-btn');
-      listNameP.id = 'active';
-      div.appendChild(listNameP);
-      div.appendChild(deleteProjectP);
-      projectList.appendChild(div);
-    };
+    const projectList = document.getElementById('project-list');
+    displayList();
+    
     newProjectBtn.addEventListener('click', () => {
-      let activeProject = document.getElementById('active');
+      const activeProject = document.getElementById('active').firstChild.textContent;
+      displayList();
+      todoContainerH2.textContent = activeProject;
+    });
+    projectList.addEventListener('click', e => {
+      if(e.target.classList.contains('delete-project-btn')) {
+        displayList();
+      }
+      e.target.parentNode.id = 'active';
+    });
+
+    function displayList() {
       while(projectList.lastChild) {
         projectList.removeChild(projectList.firstChild);
       }
@@ -51,30 +54,32 @@ function displayHandler() {
         listNameP.textContent = listName;
         deleteProjectP.textContent = "x";
         deleteProjectP.classList.add('delete-project-btn');
-        if(activeProject.textContent === listName) {
-          listNameP.id = "active";
+        if(document.querySelector('#active') == null) {
+          div.id = 'active';
+          todoContainerH2.textContent = listName;
         }
         div.appendChild(listNameP);
         div.appendChild(deleteProjectP);
         projectList.appendChild(div);
-      }
-    });
+      };
+    };
   })();
 
   (function displayTodos() {
     const todoListContainer = document.getElementById('todo-list-container');
     document.addEventListener('click', e => {
-      if(e.target.id === 'add-todo-btn' || e.target.classList.contains('delete-todo-btn') || e.target.id === 'active') {
+      if(e.target.id === 'add-todo-btn' || e.target.classList.contains('delete-todo-btn') || e.target.parentNode.id === 'active') {
         let activeProject = document.getElementById('active').firstChild.textContent;
         if(e.target.id === 'add-todo-btn') {
           projects[activeProject].push(todos[todos.length - 1]);
         };
         if(e.target.classList.contains('delete-todo-btn')) {
           projects[activeProject].splice(Array.from(e.target.parentNode.parentNode.children).indexOf(e.target.parentNode), 1);
-        }
+        };
         while(todoListContainer.firstChild) {
           todoListContainer.removeChild(todoListContainer.lastChild);
         };
+        console.log(activeProject);
         for(let i = 0; i < projects[activeProject].length; i++) {
           let div = document.createElement('div');
           div.classList.add('todo-container');
