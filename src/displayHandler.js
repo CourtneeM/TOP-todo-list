@@ -71,7 +71,20 @@ function displayHandler() {
     const todoListContainer = document.getElementById('todo-list-container');
     document.addEventListener('click', e => {
       if(e.target.id === 'add-todo-btn' || e.target.classList.contains('delete-todo-btn') || e.target.parentNode.id === 'active') {
+        if(e.target.id === 'add-todo-btn') {
+          let createTodoInputs = Array.from(document.getElementById('create-todo-container').querySelectorAll('input'));
+          for(let i = 0; i < createTodoInputs.length; i++) {
+            if(createTodoInputs[i].value === "") {
+              for(let j = 0; j < createTodoInputs.length; j++) {
+                createTodoInputs[j].value = "";
+              }
+              return;
+            }
+            createTodoInputs[i].value = "";
+          }
+        }
         let activeProject = document.getElementById('active').firstChild.textContent;
+        console.log(todos);
         if(e.target.id === 'add-todo-btn') {
           projects[activeProject].push(todos[todos.length - 1]);
         };
@@ -81,13 +94,16 @@ function displayHandler() {
         while(todoListContainer.firstChild) {
           todoListContainer.removeChild(todoListContainer.lastChild);
         };
-        console.log(activeProject);
         for(let i = 0; i < projects[activeProject].length; i++) {
           let div = document.createElement('div');
           div.classList.add('todo-container');
           for(let item in projects[activeProject][i]) {
             let p = document.createElement('p');
-            p.textContent = `${item}: ${projects[activeProject][i][item]}`;
+            if(item === "Title" || item === "Description") {
+              p.textContent = `${projects[activeProject][i][item]}`;
+            } else {
+              p.textContent = `${item}: ${projects[activeProject][i][item]}`;
+            }
             div.appendChild(p);
           };
           todoListContainer.appendChild(div);
