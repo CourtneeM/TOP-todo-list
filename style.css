@@ -10,6 +10,8 @@ h2 {
   text-align: center;
 }
 
+/***** PROJECTS SECTION *****/
+
 #projects-container {
   width: 350px;
   padding: 0 10px;
@@ -86,6 +88,8 @@ input:focus {
   border-radius: 50%;
 }
 
+/***** TODO LIST CONTAINER *****/
+
 #current-todos {
   flex-basis: 85%;
   margin: 0 auto;
@@ -93,10 +97,10 @@ input:focus {
 
 #create-todo-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  width: 700px;
+  width: 800px;
   margin: 0 auto;
   padding: 10px 20px 20px;
   text-align: center;
@@ -110,7 +114,7 @@ input:focus {
 
 #add-todo-btn {
   margin-top: 30px;
-  padding: 15px 30px;
+  padding: 15px 50px;
   color: #fff;
   font-weight: bold;
   background-color: rgb(64, 224, 208);
@@ -131,14 +135,35 @@ input:focus {
   margin: 30px;
 }
 
+/***** TODO CONTAINER *****/
+
 .todo-container {
   position: relative;
   display: grid;
+  align-items: center;
   grid-template-columns: 1fr 1fr;
   height: 250px;
   text-align: center;
   border: 1px solid #000;
   border-radius: 15px;
+}
+
+.todo-container p:nth-child(1), .todo-container p:nth-child(2) {
+  grid-column: 1 / 3;
+}
+
+.todo-container p:nth-child(1), .todo-container p:nth-child(2) {
+  margin: 0;
+  padding: 0;
+}
+.todo-container p:nth-child(1) {
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+.todo-container p:nth-child(2) {
+  font-size: 0.9rem;
+  font-style: italic;
 }
 
 .todo-container:hover .delete-todo-btn{
