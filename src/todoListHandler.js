@@ -1,5 +1,3 @@
-
-
 class Todo {
   constructor(title, description, dueDate, priority) {
     this["Title"] = title;
@@ -10,34 +8,34 @@ class Todo {
 };
 
 
-function todoListHandler() {
+const todoListHandler = (function() {
   let todos = [];
-  const addTodoBtn = document.getElementById('add-todo-btn');
-  const todoListContainer = document.getElementById('todo-list-container');
   let titleInput = document.getElementById('title-input');
   let descriptionInput = document.getElementById('description-input');
   let dueDateInput = document.getElementById('due-date-input');
   let priorityInput = document.getElementById('priority-input');
 
-  (function createTodo() {
-    addTodoBtn.addEventListener('click', () => {
-      if (titleInput.value === "" || descriptionInput.value === "" || dueDateInput.value === "" || priorityInput.value === "") {
-        return;
-      } else {
-        todos.push(new Todo(titleInput.value, descriptionInput.value, dueDateInput.value, priorityInput.value));
-      };
-    });
-  })();
+  const createTodo = function() {
+    todos.push(new Todo(titleInput.value, descriptionInput.value, dueDateInput.value, priorityInput.value));
+  };
   
-  (function deleteTodo() {
-    todoListContainer.addEventListener('click', e => {
-      if(e.target.classList.contains('delete-todo-btn')) {
-        let todoIndex = (Array.from(e.target.parentNode.parentNode.children)).indexOf(e.target.parentNode);
-        todos.splice([todoIndex], 1);
-      };
-    });
-  })();
-  return todos;
-};
+  const deleteTodo = function(todoIndex) {
+    todos.splice([todoIndex], 1);
+  };
+
+  // (function changeTodo() {
+  //   document.addEventListener('click', e => {
+  //     if(e.target.classList.contains('edit-todo-btn')) {
+  //       todos[Array.from(e.target.parentNode.parentNode.children).indexOf(e.target.parentNode)] = new Todo(titleInput.value, descriptionInput.value, dueDateInput.value, priorityInput.value);
+  //     }
+  //   });
+  // })();
+
+  return {
+    todos: todos,
+    createTodo: createTodo,
+    deleteTodo: deleteTodo
+  }
+})();
 
 export default todoListHandler;

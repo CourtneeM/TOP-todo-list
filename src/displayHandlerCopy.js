@@ -91,9 +91,7 @@ function displayHandler() {
           projects[activeProject].push(todos[todos.length - 1]);
         };
         if(e.target.classList.contains('delete-todo-btn')) {
-          const todoIndex = Array.from(e.target.parentNode.parentNode.children).indexOf(e.target.parentNode);
-          todoListHandler.deleteTodo(todoIndex);
-          projects[activeProject].splice(todoIndex, 1);
+          projects[activeProject].splice(Array.from(e.target.parentNode.parentNode.children).indexOf(e.target.parentNode), 1);
         };
         // if(e.target.classList.contains('edit-todo-btn')) {
         //   const todoIndex = Array.from(e.target.parentNode.parentNode.children).indexOf(e.target.parentNode);

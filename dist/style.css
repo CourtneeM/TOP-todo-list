@@ -157,20 +157,20 @@ input:focus {
   padding: 0;
 }
 .todo-container p:nth-child(1) {
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   font-weight: 800;
 }
 
 .todo-container p:nth-child(2) {
-  font-size: 0.9rem;
   font-style: italic;
 }
 
-.todo-container:hover .delete-todo-btn{
+.todo-container:hover .delete-todo-btn, .todo-container:hover .edit-todo-btn {
   display: block;
 }
 
 .delete-todo-btn {
+  display: none;
   position: absolute;
   bottom: -16px;
   left: 0%;
@@ -185,5 +185,18 @@ input:focus {
   background-color: red;
   border-top: 1px solid #000;
   border-radius: 0 0 15px 15px;
+  cursor: pointer;
+}
+
+.edit-todo-btn {
+  display: none;
+  position: absolute;
+  top: 10px;
+  left: 30px;
+  padding: 5px 10px;
+  font-size: 0.8rem;
+  color: #fff;
+  background-color: turquoise;
+  border-radius: 7px;
   cursor: pointer;
 }
