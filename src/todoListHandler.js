@@ -23,18 +23,15 @@ const todoListHandler = (function() {
     todos.splice([todoIndex], 1);
   };
 
-  // (function changeTodo() {
-  //   document.addEventListener('click', e => {
-  //     if(e.target.classList.contains('edit-todo-btn')) {
-  //       todos[Array.from(e.target.parentNode.parentNode.children).indexOf(e.target.parentNode)] = new Todo(titleInput.value, descriptionInput.value, dueDateInput.value, priorityInput.value);
-  //     }
-  //   });
-  // })();
+  const editTodo = function(todoIndex) {
+    todos[todoIndex] = new Todo(titleInput.value, descriptionInput.value, dueDateInput.value, priorityInput.value);
+  };
 
   return {
     todos: todos,
     createTodo: createTodo,
-    deleteTodo: deleteTodo
+    deleteTodo: deleteTodo,
+    editTodo: editTodo
   }
 })();
 

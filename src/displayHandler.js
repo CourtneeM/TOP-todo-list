@@ -72,23 +72,27 @@ function todoListDisplayHandler() {
   let projects = projectHandler.projects;
   let todos = todoListHandler.todos;
 
-  (function displayNewTodos() {
+  (function addTodo() {
     const addTodoBtn = document.getElementById('add-todo-btn');
     addTodoBtn.addEventListener('click', () => {
       let activeProject = document.getElementById('active').firstChild.textContent;
       todoListHandler.createTodo();
-      let createTodoInputs = Array.from(document.getElementById('create-todo-container').querySelectorAll('input'));
-      for(let i = 0; i < createTodoInputs.length; i++) {
-        if(createTodoInputs[i].value === "") {
-          for(let j = 0; j < createTodoInputs.length; j++) {
-            createTodoInputs[j].value = "";
-          }
-          return;
-        }
-        createTodoInputs[i].value = "";
-      }
+      clearTodoInput();
       projects[activeProject].push(todos[todos.length - 1]);
       displayTodos();
+    });
+  })();
+
+  (function editTodo() {
+    document.addEventListener('click', e => {
+      if(e.target.classList.contains('edit-todo-btn')) {
+        const todoIndex = Array.from(e.target.parentNode.parentNode.children).indexOf(e.target.parentNode);
+        let activeProject = document.getElementById('active').firstChild.textContent;
+        todoListHandler.editTodo(todoIndex);
+        projects[activeProject][todoIndex] = todos[todoIndex];
+        clearTodoInput();
+        displayTodos();
+      };
     });
   })();
 
@@ -102,18 +106,10 @@ function todoListDisplayHandler() {
       };
       displayTodos();
     });
-  })();
-
-  (function editTodo() {
-    // if(e.target.classList.contains('edit-todo-btn')) {
-    //   const todoIndex = Array.from(e.target.parentNode.parentNode.children).indexOf(e.target.parentNode);
-    //   projects[activeProject][todoIndex] = 
-    // };
-  })();
+  })();  
 
   function displayTodos() {
     const todoListContainer = document.getElementById('todo-list-container');
-    //if(e.target.parentNode.id === 'active') {
     let activeProject = document.getElementById('active').firstChild.textContent;
     while(todoListContainer.firstChild) {
       todoListContainer.removeChild(todoListContainer.lastChild);
@@ -130,7 +126,6 @@ function todoListDisplayHandler() {
         }
         div.appendChild(p);
       };
-      todoListContainer.appendChild(div);
       let editTodoBtn = document.createElement('p');
       editTodoBtn.classList.add('edit-todo-btn');
       editTodoBtn.textContent = "EDIT";
@@ -139,8 +134,22 @@ function todoListDisplayHandler() {
       deleteTodoBtn.classList.add('delete-todo-btn');
       deleteTodoBtn.textContent = "DELETE";
       div.appendChild(deleteTodoBtn);
+      todoListContainer.appendChild(div);
     };
-  //};
+  };
+
+  function clearTodoInput() {
+    let createTodoInputs = Array.from(document.getElementById('create-todo-container').querySelectorAll('input'));
+    debugger;
+    for(let i = 0; i < createTodoInputs.length; i++) {
+      if(createTodoInputs[i].value === "") {
+        for(let j = 0; j < createTodoInputs.length; j++) {
+          createTodoInputs[j].value = "";
+        }
+        return;
+      }
+      createTodoInputs[i].value = "";
+    }
   };
 };
 
