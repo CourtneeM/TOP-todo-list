@@ -72,7 +72,7 @@ function todoListDisplayHandler() {
   let projects = projectHandler.projects;
   let todos = todoListHandler.todos;
 
-  (function displayNewTodos() {
+  (function addTodo() {
     const addTodoBtn = document.getElementById('add-todo-btn');
     addTodoBtn.addEventListener('click', () => {
       let activeProject = document.getElementById('active').firstChild.textContent;
