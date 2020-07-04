@@ -1,9 +1,9 @@
 import projectHandler from './projectHandler.js';
 import todoListHandler from './todoListHandler.js';
 
-function displayHandler() {
+
+function projectsDisplayHandler() {
   let projects = projectHandler.projects;
-  let todos = todoListHandler.todos;
   const projectList = document.getElementById('project-list');
   const todoContainerH2 = document.querySelector('#current-todos>h2');
 
@@ -11,12 +11,7 @@ function displayHandler() {
     projectList.addEventListener('click', e => {
       const project = Array.from(projectList.querySelectorAll('div'));
       const projectIndex = Array.from(e.target.parentNode.parentNode.children).indexOf(e.target.parentNode);
-      let selectedProjectName = project[projectIndex].firstChild.textContent;
-      if(e.target.classList.contains('delete-project-btn')) {
-
-      };
-      todoContainerH2.textContent = selectedProjectName;
-      
+      todoContainerH2.textContent = project[projectIndex].firstChild.textContent;
       for(let i = 0; i < Array.from(project).length; i++) {
         if(project[i].id === 'active') {
           project[i].removeAttribute('id');
@@ -28,27 +23,30 @@ function displayHandler() {
 
   (function displayProjectList() {
     const newProjectBtn = document.getElementById('new-project-btn');
-    const projectList = document.getElementById('project-list');
     displayList();
     
-    newProjectBtn.addEventListener('click', () => {
-      const activeProject = document.getElementById('active').firstChild.textContent;
-      projectHandler.addNewProject();
-      displayList();
-      todoContainerH2.textContent = activeProject;
-    });
-    projectList.addEventListener('click', e => {
-      if(e.target.classList.contains('delete-project-btn')) {
-        projectHandler.deleteProject(e.target.previousSibling.textContent);
+    (function displayNewProject() {
+      newProjectBtn.addEventListener('click', () => {
+        const activeProject = document.getElementById('active').firstChild.textContent;
+        projectHandler.addNewProject();
         displayList();
-      }
-      e.target.parentNode.id = 'active';
-    });
+        todoContainerH2.textContent = activeProject;
+      });
+    })();
+
+    (function deleteProject() {
+      projectList.addEventListener('click', e => {
+        if(e.target.classList.contains('delete-project-btn')) {
+          projectHandler.deleteProject(e.target.previousSibling.textContent);
+          displayList();
+        }
+      });
+    })();
 
     function displayList() {
       while(projectList.lastChild) {
         projectList.removeChild(projectList.firstChild);
-      }
+      };
       for(let listName in projects) {
         let div = document.createElement('div');
         let listNameP = document.createElement('p');
@@ -68,6 +66,11 @@ function displayHandler() {
       };
     };
   })();
+};
+
+function todoListDisplayHandler() {
+  let projects = projectHandler.projects;
+  let todos = todoListHandler.todos;
 
   (function displayTodos() {
     const todoListContainer = document.getElementById('todo-list-container');
@@ -130,6 +133,9 @@ function displayHandler() {
       };
     });
   })();
-}
+};
 
-displayHandler();
+
+
+projectsDisplayHandler();
+todoListDisplayHandler();

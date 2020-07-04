@@ -10,7 +10,7 @@ const projectHandler = (function() {
     if(newProjectInput.value !== "") {
       projects[newProjectInput.value] = [];
       newProjectInput.value = "";
-    }
+    };
   };
 
   const deleteProject = function(projectName) {
