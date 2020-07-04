@@ -2,7 +2,7 @@ import projectHandler from './projectHandler.js';
 import todoListHandler from './todoListHandler.js';
 
 function displayHandler() {
-  let projects = projectHandler();
+  let projects = projectHandler.projects;
   let todos = todoListHandler.todos;
   const projectList = document.getElementById('project-list');
   const todoContainerH2 = document.querySelector('#current-todos>h2');
@@ -33,11 +33,13 @@ function displayHandler() {
     
     newProjectBtn.addEventListener('click', () => {
       const activeProject = document.getElementById('active').firstChild.textContent;
+      projectHandler.addNewProject();
       displayList();
       todoContainerH2.textContent = activeProject;
     });
     projectList.addEventListener('click', e => {
       if(e.target.classList.contains('delete-project-btn')) {
+        projectHandler.deleteProject(e.target.previousSibling.textContent);
         displayList();
       }
       e.target.parentNode.id = 'active';

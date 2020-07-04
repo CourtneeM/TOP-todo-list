@@ -1,32 +1,28 @@
-function projectHandler() {
+const projectHandler = (function() {
   let projects = {
     "Default List": [] 
   };
   
   
   
-  (function addNewProject() {
-    const newProjectBtn = document.getElementById('new-project-btn');
+  const addNewProject = function() {
     const newProjectInput = document.getElementById('new-project-input');
-    newProjectBtn.addEventListener('click', (e) => {
-      if(newProjectInput.value !== "") {
-        projects[newProjectInput.value] = [];
-        newProjectInput.value = "";
-      }
-    });
-  })();
+    if(newProjectInput.value !== "") {
+      projects[newProjectInput.value] = [];
+      newProjectInput.value = "";
+    }
+  };
 
-  (function deleteProject() {
-    const projectList = document.getElementById('project-list');
-    projectList.addEventListener('click', e => {
-      if(e.target.textContent === "x") {
-        delete projects[e.target.previousSibling.textContent];
-      };
-      console.log(projects);
-    });
-  })();
+  const deleteProject = function(projectName) {
+    delete projects[projectName];
+  };
 
-  return projects;
-};
+  return { 
+    projects: projects,
+    addNewProject: addNewProject,
+    deleteProject: deleteProject
+  }
+
+})();
 
 export default projectHandler;
