@@ -72,12 +72,21 @@ function todoListDisplayHandler() {
   let projects = projectHandler.projects;
   let todos = todoListHandler.todos;
 
-  (function addTodo() {
+  (function displayNewTodos() {
     const addTodoBtn = document.getElementById('add-todo-btn');
     addTodoBtn.addEventListener('click', () => {
       let activeProject = document.getElementById('active').firstChild.textContent;
       todoListHandler.createTodo();
-      clearTodoInput();
+      let createTodoInputs = Array.from(document.getElementById('create-todo-container').querySelectorAll('input'));
+      for(let i = 0; i < createTodoInputs.length; i++) {
+        if(createTodoInputs[i].value === "") {
+          for(let j = 0; j < createTodoInputs.length; j++) {
+            createTodoInputs[j].value = "";
+          }
+          return;
+        }
+        createTodoInputs[i].value = "";
+      }
       projects[activeProject].push(todos[todos.length - 1]);
       displayTodos();
     });
@@ -88,10 +97,18 @@ function todoListDisplayHandler() {
       if(e.target.classList.contains('edit-todo-btn')) {
         const todoIndex = Array.from(e.target.parentNode.parentNode.children).indexOf(e.target.parentNode);
         let activeProject = document.getElementById('active').firstChild.textContent;
+        let createTodoInputs = Array.from(document.getElementById('create-todo-container').querySelectorAll('input'));
         todoListHandler.editTodo(todoIndex);
+        for(let i = 0; i < createTodoInputs.length; i++) {
+          if(createTodoInputs[i].value === "") {
+            for(let j = 0; j < createTodoInputs.length; j++) {
+              createTodoInputs[j].value = "";
+            }
+            return;
+          }
+          createTodoInputs[i].value = "";
+        }
         projects[activeProject][todoIndex] = todos[todoIndex];
-        clearTodoInput();
-        displayTodos();
       };
     });
   })();
@@ -136,20 +153,6 @@ function todoListDisplayHandler() {
       div.appendChild(deleteTodoBtn);
       todoListContainer.appendChild(div);
     };
-  };
-
-  function clearTodoInput() {
-    let createTodoInputs = Array.from(document.getElementById('create-todo-container').querySelectorAll('input'));
-    debugger;
-    for(let i = 0; i < createTodoInputs.length; i++) {
-      if(createTodoInputs[i].value === "") {
-        for(let j = 0; j < createTodoInputs.length; j++) {
-          createTodoInputs[j].value = "";
-        }
-        return;
-      }
-      createTodoInputs[i].value = "";
-    }
   };
 };
 
