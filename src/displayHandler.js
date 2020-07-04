@@ -136,12 +136,16 @@ function todoListDisplayHandler() {
       div.classList.add('todo-container');
       for(let item in projects[activeProject][i]) {
         let p = document.createElement('p');
+        div.appendChild(p);
         if(item === "Title" || item === "Description") {
           p.textContent = `${projects[activeProject][i][item]}`;
+        } else if(item === "Priority" ) {
+          const priorityClass = {Low: "low", Medium: "medium", High: "high", Urgent: "urgent" };
+          p.textContent = `${item}: ${projects[activeProject][i][item]}`;
+          p.parentNode.classList.add(`${priorityClass[projects[activeProject][i][item]]}-priority`);
         } else {
           p.textContent = `${item}: ${projects[activeProject][i][item]}`;
         }
-        div.appendChild(p);
       };
       let editTodoBtn = document.createElement('p');
       editTodoBtn.classList.add('edit-todo-btn');
@@ -153,6 +157,16 @@ function todoListDisplayHandler() {
       div.appendChild(deleteTodoBtn);
       todoListContainer.appendChild(div);
     };
+  };
+
+  function assignPriority(activeProject) {
+    // for(let i = 0; i < projects[activeProject].length; i++) {
+    //   for(let item in proejcts[activeProject][i]) {
+    //     if(item === priority) {
+          
+    //     };
+    //   };
+    // };
   };
 };
 

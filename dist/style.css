@@ -200,3 +200,22 @@ input:focus {
   border-radius: 7px;
   cursor: pointer;
 }
+
+/***** Todo Priority Color *****/
+
+.low-priority {
+  background-color: cornsilk;
+}
+
+.medium-priority {
+  background-color: yellow;
+}
+
+.high-priority {
+  background-color: orangered;
+}
+
+.urgent-priority {
+  color: #eee;
+  background-color: darkred;
+}
