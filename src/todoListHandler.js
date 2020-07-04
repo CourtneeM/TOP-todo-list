@@ -4,6 +4,7 @@ class Todo {
     this["Description"] = description;
     this["Due Date"] = dueDate;
     this["Priority"] = priority;
+    this["Completed"] = false;
   };
 };
 
@@ -27,11 +28,16 @@ const todoListHandler = (function() {
     todos[todoIndex] = new Todo(titleInput.value, descriptionInput.value, dueDateInput.value, priorityInput.value);
   };
 
+  const toggleCompleted = function(todoIndex) {
+    todos[todoIndex]["Completed"] = !todos[todoIndex]["Completed"];
+  };
+
   return {
     todos: todos,
     createTodo: createTodo,
+    editTodo: editTodo,
     deleteTodo: deleteTodo,
-    editTodo: editTodo
+    toggleCompleted: toggleCompleted
   }
 })();
 

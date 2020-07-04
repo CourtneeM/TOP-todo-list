@@ -91,7 +91,7 @@ input:focus {
 /***** TODO LIST CONTAINER *****/
 
 #current-todos {
-  flex-basis: 85%;
+  flex-basis: 75%;
   margin: 0 auto;
 }
 
@@ -143,6 +143,7 @@ input:focus {
   align-items: center;
   grid-template-columns: 1fr 1fr;
   height: 250px;
+  padding-bottom: 30px;
   text-align: center;
   border: 1px solid #000;
   border-radius: 15px;
@@ -212,6 +213,7 @@ input:focus {
 }
 
 .high-priority {
+  color: #eee;
   background-color: orangered;
 }
 

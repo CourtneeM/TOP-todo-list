@@ -109,10 +109,11 @@ function todoListDisplayHandler() {
           createTodoInputs[i].value = "";
         }
         projects[activeProject][todoIndex] = todos[todoIndex];
+        displayTodos();
       };
     });
   })();
-
+  
   (function deleteTodo() {
     document.addEventListener('click', e => {
       if(e.target.classList.contains('delete-todo-btn')) {
@@ -120,10 +121,23 @@ function todoListDisplayHandler() {
         let activeProject = document.getElementById('active').firstChild.textContent;
         todoListHandler.deleteTodo(todoIndex);
         projects[activeProject].splice(todoIndex, 1);
+        displayTodos();
       };
-      displayTodos();
     });
-  })();  
+  })();
+  
+  (function toggleCompleted() {
+    document.addEventListener('click', e => {
+      if(e.target.type === 'checkbox') {
+        const todoIndex = Array.from(e.target.parentNode.parentNode.parentNode.children).indexOf(e.target.parentNode.parentNode);
+        let activeProject = document.getElementById('active').firstChild.textContent;
+        todoListHandler.toggleCompleted(todoIndex);
+        projects[activeProject][todoIndex] = todos[todoIndex];
+        displayTodos();
+        console.log(todos, projects[activeProject]);
+      };
+    });
+  })();
 
   function displayTodos() {
     const todoListContainer = document.getElementById('todo-list-container');
@@ -143,6 +157,17 @@ function todoListDisplayHandler() {
           const priorityClass = {Low: "low", Medium: "medium", High: "high", Urgent: "urgent" };
           p.textContent = `${item}: ${projects[activeProject][i][item]}`;
           p.parentNode.classList.add(`${priorityClass[projects[activeProject][i][item]]}-priority`);
+        } else if(item === "Completed") {
+          let checkbox = document.createElement('input');
+          checkbox.type = 'checkbox';
+          if(projects[activeProject][i][item]) {
+            p.textContent = `${item}:`;
+            checkbox.checked = true;
+          } else {
+            p.textContent = `${item}:`;
+            checkbox.checked = false;
+          };
+          p.appendChild(checkbox);
         } else {
           p.textContent = `${item}: ${projects[activeProject][i][item]}`;
         }
