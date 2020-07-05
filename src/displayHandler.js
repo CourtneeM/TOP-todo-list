@@ -131,11 +131,19 @@ function todoListDisplayHandler() {
       if(e.target.type === 'checkbox') {
         const todoIndex = Array.from(e.target.parentNode.parentNode.parentNode.children).indexOf(e.target.parentNode.parentNode);
         let activeProject = document.getElementById('active').firstChild.textContent;
+        let completedStatus = projects[activeProject][todoIndex]["Completed"];
         todoListHandler.toggleCompleted(todoIndex);
-        projects[activeProject][todoIndex] = todos[todoIndex];
+        console.log(projects, todos);
+        projects[activeProject][todoIndex]["Completed"] = !completedStatus;
         displayTodos();
-        console.log(todos, projects[activeProject]);
       };
+    });
+  })();
+
+  (function displayProjectTodos() {
+    const projectList = document.getElementById('project-list');
+    projectList.addEventListener('click', () => {
+      displayTodos();
     });
   })();
 
@@ -182,16 +190,6 @@ function todoListDisplayHandler() {
       div.appendChild(deleteTodoBtn);
       todoListContainer.appendChild(div);
     };
-  };
-
-  function assignPriority(activeProject) {
-    // for(let i = 0; i < projects[activeProject].length; i++) {
-    //   for(let item in proejcts[activeProject][i]) {
-    //     if(item === priority) {
-          
-    //     };
-    //   };
-    // };
   };
 };
 
