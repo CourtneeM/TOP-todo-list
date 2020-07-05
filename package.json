@@ -1,0 +1,25 @@
+{
+  "name": "TOP-todo-list",
+  "version": "1.0.0",
+  "description": "My version of The Odin Project <a href=\"https://www.theodinproject.com/lessons/todo-list\">Todo List</a> project",
+  "dependencies": {
+    "webpack-cli": "^3.3.12",
+    "webpack": "^4.43.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CourtneeM/TOP-todo-list.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CourtneeM/TOP-todo-list/issues"
+  },
+  "homepage": "https://github.com/CourtneeM/TOP-todo-list#readme"
+}

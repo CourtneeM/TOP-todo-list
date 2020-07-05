@@ -133,14 +133,13 @@ function todoListDisplayHandler() {
         let activeProject = document.getElementById('active').firstChild.textContent;
         let completedStatus = projects[activeProject][todoIndex]["Completed"];
         todoListHandler.toggleCompleted(todoIndex);
-        console.log(projects, todos);
         projects[activeProject][todoIndex]["Completed"] = !completedStatus;
         displayTodos();
       };
     });
   })();
 
-  (function displayProjectTodos() {
+  (function displayActiveProjectTodos() {
     const projectList = document.getElementById('project-list');
     projectList.addEventListener('click', () => {
       displayTodos();
@@ -194,6 +193,7 @@ function todoListDisplayHandler() {
 };
 
 
-
-projectsDisplayHandler();
-todoListDisplayHandler();
+export { 
+  projectsDisplayHandler,
+  todoListDisplayHandler   
+}
